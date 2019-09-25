@@ -16,7 +16,7 @@ require ('./config/passport')(passport);
 //Mongoose
 const db = require('./config/keys').MongoURI;
 mongoose.Promise = global.Promise;
-mongoose.connect(db, {useNewUrlParser: true})
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('\nMongodb connected...'))
     .catch(err => console.error(err));
 
@@ -60,7 +60,6 @@ app.use(passport.session());
 //Router
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
-app.use('/saler/new-saler', require('./routes/saler'));
 
 app.listen(port, () => {
     console.log('Server is running on port 3001');

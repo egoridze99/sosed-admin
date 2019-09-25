@@ -2,6 +2,8 @@ const router = require('express').Router();
 const passport = require('passport');
 const { forwardAuthenticated } = require('../config/auth');
 
+const Saler = require('../models/Saler');
+
 router.get('/login', forwardAuthenticated, (req, res) => {
     res.render('login');
 })
@@ -19,10 +21,5 @@ router.get('/logout', (req, res) => {
     req.flash('success_msg', 'You are logged out');
     res.redirect('/user/login');
   });
-
-
-router.post('/saler/new-saler', (req, res) => {
-    console.log(req.body);
-});
 
 module.exports = router;

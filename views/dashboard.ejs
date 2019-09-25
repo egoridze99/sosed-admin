@@ -1,7 +1,12 @@
 <%- include('header') %>
 <%- include('modals/add-saler') %>
+<%- include('modals/goodRegister') %>
+<%- include('modals/badRegister') %>
 
-<div class="container-fluid">
+<div class="container-fluid" id="dashboard-container">
+    <div class="row justify-content-center align-items-center mt-5">
+        <% include ./partials/messages %>
+    </div>
     <div class="row justify-content-center align-items-center mt-5">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewSaler">
             Добавить нового продавца
@@ -27,8 +32,10 @@
         <p class="col-md-3 mt-1"><%= saler.name.lastName %></p>
         <p class="col-md-3 mt-1"><%= saler.login %></p>
         <div class="col-md-3 mb-3">
-            <button data-id = "<%= saler._id %>" class="btn btn-dark">Удалить</button>
+            <button data-id="<%= saler._id %>" class="btn btn-dark delete-saler">Удалить</button>
         </div>
     </div>
     <% }) %>
 </div>
+
+<script src="./script/script.js"></script>
