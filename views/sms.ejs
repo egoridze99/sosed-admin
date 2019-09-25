@@ -1,0 +1,27 @@
+<%- include('header') %>
+<%- include('modals/goodRegister') %>
+<%- include('modals/badRegister') %>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center mt-5">
+        <h2>SMS рассылка</h2>
+    </div>
+
+    <div class="card mt-5 text-center" style="max-width: 500px; margin: auto">
+        <div class="card-header">
+            Рассылка
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Введите текст здесь и нажмите отправить</h5>
+
+            <form action="/sms/send" method="POST" id="send-sms">
+                <textarea class="form-control mt-5" aria-label="With textarea" rows="5" name="text"></textarea>
+
+                <button class="btn btn-primary mt-5" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="./script/sms.js"></script>
