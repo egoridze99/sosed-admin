@@ -62,6 +62,7 @@ app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
 app.use('/saler', require('./routes/saler'));
 app.use('/sms', require('./routes/sms'));
+app.use('/statistic', require('./routes/statisic'));
 
 app.listen(port, () => {
     console.log('Server is running on port 3001');

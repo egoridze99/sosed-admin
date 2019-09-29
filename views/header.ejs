@@ -11,17 +11,15 @@
         <li class="nav-item <%= activeLink === 'sms' ? 'active' : '' %>">
           <a class="nav-link" href="/sms">Рассылка</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown <%= activeLink === 'statistic' ? 'active' : '' %>">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
+            Статистика
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="/statistic/day">Статистика за день</a>
+            <a class="dropdown-item" href="/statistic/month">Статистика за месяц</a>
+            <a class="dropdown-item" href="/statistic/period">Статистика за период</a>
+            <a class="dropdown-item" href="/statistic/charts">Графики</a>
           </div>
         </li>
       </ul>

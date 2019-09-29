@@ -16,6 +16,7 @@ document.querySelector('#send-sms')
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
+                document.querySelector('#sms-textarea').value = '';
                 switch (data.status) {
                     case 'ok':
                         $('#good-modal').modal('toggle');
