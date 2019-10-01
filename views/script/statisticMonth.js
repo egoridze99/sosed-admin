@@ -64,63 +64,42 @@ function drawTransactions(transactions) {
     })
   }
 
-$(function() {
-    $('input[name="selectDay"]').daterangepicker({
-        singleDatePicker: true,
-        locale: {
-            format: 'DD.MM.YYYY',
-            daysOfWeek: [
-                "Вс",
-                "Пн",
-                "Вт",
-                "Ср",
-                "Чт",
-                "Пт",
-                "Сб",
-            ],
-            monthNames: [
-                "Январь",
-                "Февраль",
-                "Март",
-                "Апрель",
-                "Май",
-                "Июнь",
-                "Июль",
-                "Август",
-                "Сентябрь",
-                "Октябрь",
-                "Ноябрь",
-                "Декабрь"
-            ],
-            firstDay : '1'
-        },
-        minYear: 2019,
-        maxYear: parseInt(moment().format('YYYY'),10)
-    }, function(start) {
-        const date = start._d;
+document
+  .querySelector("#statisticMonth")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
 
-        const url = '/statistic/day';
-        const options = {
-            method : 'POST',
-            body : JSON.stringify({date}),
-            headers : {
-                'content-type' : 'application/json'
-            }
-        };
-        console.log(date);
-        fetch(url, options)
-            .then(res => res.json())
-            .then(data => {
-                drawTransactions(data.transactions);
-            
-                $('#statisticLitres').text(data.amountLitres);
-                $('#statisticSum').text(data.amountSum);
-                $('#statisticFree').text(data.amountOfFree);
-                $('#statisticSaler').text(data.bestSaler);
-                $('#statisticSold').text(data.maxLitres);
-                $('#statisticModal').modal('show');
-            })
-            .catch(err => console.error(err));
+    const formData = Object.fromEntries(new FormData(event.target).entries());
 
+    const startDateString = `${formData.month}.01.${formData.year}`;
+    const endDateString = `${
+      formData.month === "12" ? "01" : Number(formData.month) + 1
+    }.01.${formData.month === "12" ? Number(formData.year) + 1 : formData.year}`;
+
+    const url = '/statistic/month';
+    const body = JSON.stringify({
+        startDate : startDateString,
+        endDate : endDateString
     });
-});
+    const options = {
+        method : 'POST',
+        body,
+        headers : {
+            'content-type' : 'application/json'
+        }
+    };
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(data => {
+            drawTransactions(data.transactions);
+            
+            $('#statisticLitres').text(data.amountLitres);
+            $('#statisticSum').text(data.amountSum);
+            $('#statisticFree').text(data.amountOfFree);
+            $('#statisticSaler').text(data.bestSaler);
+            $('#statisticSold').text(data.maxLitres);
+            $('#statisticModal').modal('show');
+        })
+        .catch(err => console.error(err));
+  });

@@ -66,7 +66,7 @@ function drawTransactions(transactions) {
 
 $(function() {
     $('input[name="selectDay"]').daterangepicker({
-        singleDatePicker: true,
+        singleDatePicker: false,
         locale: {
             format: 'DD.MM.YYYY',
             daysOfWeek: [
@@ -96,18 +96,22 @@ $(function() {
         },
         minYear: 2019,
         maxYear: parseInt(moment().format('YYYY'),10)
-    }, function(start) {
-        const date = start._d;
+    }, function(start, end) {
+        const startDate = start._d;
+        const endDate = end._d;
 
-        const url = '/statistic/day';
+        const url = '/statistic/period';
         const options = {
             method : 'POST',
-            body : JSON.stringify({date}),
+            body : JSON.stringify({
+                startDate,
+                endDate
+            }),
             headers : {
                 'content-type' : 'application/json'
             }
         };
-        console.log(date);
+
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
