@@ -17,9 +17,11 @@ router.post('/send', ensureAuthenticated, async (req, res) => {
         to: item.telefone,
         text: req.body.text
       }, function(e){
-        res.send(JSON.stringify({status : 'ok'}));
+        fs.writeFileSync('/log.txt', 'Succesfully sended\n');
       });
     })
+
+    res.send(JSON.stringify({status : 'ok'}));
 })
 
 module.exports = router;
